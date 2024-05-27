@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import style from "./Game.module.css";
 
@@ -6,10 +6,20 @@ export default function Game() {
   const location = useLocation();
   const chosenImage = location.state?.image;
   const [imagesToFind, setImagesToFind] = useState([]);
+  const imageContainerRef = useRef(null);
+  const [imageContainerSize, setImageContainerSize] = useState({
+    width: 0,
+    height: 0,
+  });
   const [mouseCircle, setMouseCircle] = useState(false);
   const [mouseCoordinates, setMouseCoordinates] = useState({
     coordinateX: null,
     coordinateY: null,
+  });
+  const [targetListPosition, setTargetListPosition] = useState({
+    bottom: null,
+    left: null,
+    right: null,
   });
 
   useEffect(() => {
@@ -31,12 +41,39 @@ export default function Game() {
     setImagesToFind(targetsPath(chosenImage));
   }, [chosenImage]);
 
+  useEffect(() => {
+    const updateSize = () => {
+      if (imageContainerRef.current) {
+        const width = imageContainerRef.current.offsetWidth;
+        const height = imageContainerRef.current.offsetHeight;
+        setImageContainerSize({ width, height });
+      }
+    };
+
+    window.addEventListener("resize", updateSize);
+    updateSize();
+
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+
   function mouseClick(e) {
+    const clickX = e.nativeEvent.offsetX;
+    const clickY = e.nativeEvent.offsetY;
     setMouseCircle(!mouseCircle);
     setMouseCoordinates({
-      coordinateX: e.nativeEvent.offsetX,
-      coordinateY: e.nativeEvent.offsetY,
+      coordinateX: clickX,
+      coordinateY: clickY,
     });
+    const listPosition = {
+      bottom: "0px",
+      right: "0px",
+      left: "0px",
+    };
+
+    listPosition.left = clickX <= imageContainerSize.width / 2 ? "65px" : "";
+    listPosition.right = clickX > imageContainerSize.width / 2 ? "120px" : "";
+    listPosition.bottom = clickY >= imageContainerSize.height / 2 ? "250px" : "";
+    setTargetListPosition(listPosition);
   }
 
   return (
@@ -61,12 +98,16 @@ export default function Game() {
             coordinateX: {mouseCoordinates.coordinateX} coordinateY:{" "}
             {mouseCoordinates.coordinateY}
           </li>
-          <li> Screen width: {window.innerWidth}</li>
-          <li> Screen height: {window.innerHeight}</li>
+          <li> Container width: {imageContainerSize.width}</li>
+          <li> Container height: {imageContainerSize.height}</li>
         </ul>
       </div>
 
-      <div className={style.container} onClick={mouseClick}>
+      <div
+        className={style.container}
+        ref={imageContainerRef}
+        onClick={mouseClick}
+      >
         <div
           className={style.mouseTarget}
           style={{
@@ -75,16 +116,12 @@ export default function Game() {
             left: `${mouseCoordinates.coordinateX - 35}px`,
           }}
         >
-          <div className={style.targetList}>
-            <button className={style.targetButton}>
-              <img src="" alt="" />
-            </button>
-            <button className={style.targetButton}>
-              <img src="" alt="" />
-            </button>
-            <button className={style.targetButton}>
-              <img src="" alt="" />
-            </button>
+          <div className={style.targetList} style={targetListPosition}>
+            {imagesToFind.map((image) => (
+              <button className={style.targetButton} key={image.src}>
+                <img src={image.src} alt={image.alt} />
+              </button>
+            ))}
           </div>
         </div>
         <img src={chosenImage} className={style.gameImg} alt="" />

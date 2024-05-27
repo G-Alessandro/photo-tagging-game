@@ -24,7 +24,6 @@
 
 .targetList {
   position: relative;
-  left: 65px;
   display: flex;
   flex-direction: column;
   height: fit-content;

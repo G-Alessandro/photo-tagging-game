@@ -13,16 +13,19 @@ export default function HomePage() {
         <div>
           <h2>Choose the image</h2>
           <Link to="/game" state={{ image: monsterHunterWorldImg }}>
-            <img src={monsterHunterWorldImg} alt="" />
+            <img
+              src={monsterHunterWorldImg}
+              alt="representation of the monster hunter world video game with its diversity of fauna and flora"
+            />
           </Link>
           <Link to="/game" state={{ image: monsterHunterWorldIceborneImg }}>
-            <img src={monsterHunterWorldIceborneImg} alt="" />
+            <img src={monsterHunterWorldIceborneImg} alt="representation of the monster hunter world iceborne video game with its diversity of fauna and flora" />
           </Link>
           <Link to="/game" state={{ image: ad2222CharacterImg }}>
-            <img src={ad2222CharacterImg} alt="" />
+            <img src={ad2222CharacterImg} alt="representation of multiple animation characters or memes" />
           </Link>
           <Link to="/game" state={{ image: universe113InfestedImg }}>
-            <img src={universe113InfestedImg} alt="" />
+            <img src={universe113InfestedImg} alt="representation of multiple characters from animation, meme or film" />
           </Link>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import CancelImg from "../../assets/images/svg/cancel-green.svg";
 import style from "./Game.module.css";
 
 export default function Game() {
@@ -22,6 +23,8 @@ export default function Game() {
     right: null,
   });
 
+  const [targetsFound, setTargetFound] = useState([false, false, false]);
+
   useEffect(() => {
     function targetsPath(path) {
       let lastSlashIndex = path.lastIndexOf("/");
@@ -35,9 +38,9 @@ export default function Game() {
           alt: `target to find number ${i}`,
         });
       }
+      console.log(images)
       return images;
     }
-
     setImagesToFind(targetsPath(chosenImage));
   }, [chosenImage]);
 
@@ -72,7 +75,8 @@ export default function Game() {
 
     listPosition.left = clickX <= imageContainerSize.width / 2 ? "65px" : "";
     listPosition.right = clickX > imageContainerSize.width / 2 ? "120px" : "";
-    listPosition.bottom = clickY >= imageContainerSize.height / 2 ? "250px" : "";
+    listPosition.bottom =
+      clickY >= imageContainerSize.height / 2 ? "250px" : "";
     setTargetListPosition(listPosition);
   }
 
@@ -85,9 +89,16 @@ export default function Game() {
         </div>
         <div>
           <h2>Find:</h2>
-          <div className={style.imagesToFindContainer}>
-            {imagesToFind.map((image) => (
-              <div key={image.src}>
+          <div className={style.targetsToFindContainer}>
+            {imagesToFind.map((image, index) => (
+              <div key={image.src} className={style.targetContainer}>
+                {targetsFound[index] && (
+                  <img
+                    className={style.cancelImg}
+                    src={CancelImg}
+                    alt={`image ${index + 1} found`}
+                  />
+                )}
                 <img src={image.src} alt={image.alt} />
               </div>
             ))}
@@ -117,11 +128,14 @@ export default function Game() {
           }}
         >
           <div className={style.targetList} style={targetListPosition}>
-            {imagesToFind.map((image) => (
-              <button className={style.targetButton} key={image.src}>
-                <img src={image.src} alt={image.alt} />
-              </button>
-            ))}
+            {imagesToFind.map(
+              (image, index) =>
+                !targetsFound[index] && (
+                  <button className={style.targetButton} key={image.src}>
+                    <img src={image.src} alt={image.alt} />
+                  </button>
+                )
+            )}
           </div>
         </div>
         <img src={chosenImage} className={style.gameImg} alt="" />

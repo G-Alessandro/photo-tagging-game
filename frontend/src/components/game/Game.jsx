@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import CancelImg from "../../assets/images/svg/cancel-green.svg";
+import CancelImg from "../../assets/svg/cancel-green.svg";
 import style from "./Game.module.css";
 
 export default function Game() {
   const location = useLocation();
   const chosenImage = location.state?.image;
+  const [imageName, setImageName] = useState(null);
   const [imagesToFind, setImagesToFind] = useState([]);
   const imageContainerRef = useRef(null);
   const [imageContainerSize, setImageContainerSize] = useState({
@@ -26,22 +27,20 @@ export default function Game() {
   const [targetsFound, setTargetFound] = useState([false, false, false]);
 
   useEffect(() => {
-    function targetsPath(path) {
-      let lastSlashIndex = path.lastIndexOf("/");
-      let updatedPath = path.substring(0, lastSlashIndex);
+    let lastSlashIndex = chosenImage.lastIndexOf("/");
+    let lastDotIndex = chosenImage.lastIndexOf(".");
+    let updatedPath = chosenImage.substring(0, lastSlashIndex);
+    const imageNameNoPath = chosenImage.slice(lastSlashIndex + 1, lastDotIndex);
+    const images = [];
 
-      const images = [];
-
-      for (let i = 1; i < 4; i++) {
-        images.push({
-          src: `${updatedPath}/targets/target_${i}.jpg`,
-          alt: `target to find number ${i}`,
-        });
-      }
-      console.log(images)
-      return images;
+    for (let i = 1; i < 4; i++) {
+      images.push({
+        src: `${updatedPath}/targets/target_${i}.jpg`,
+        alt: `target to find number ${i}`,
+      });
     }
-    setImagesToFind(targetsPath(chosenImage));
+    setImageName(imageNameNoPath);
+    setImagesToFind(images);
   }, [chosenImage]);
 
   useEffect(() => {
@@ -78,6 +77,37 @@ export default function Game() {
     listPosition.bottom =
       clickY >= imageContainerSize.height / 2 ? "250px" : "";
     setTargetListPosition(listPosition);
+  }
+
+  async function handleChoice(event, index) {
+    event.preventDefault();
+    const targetChose = `target_${index}`;
+    const formData = {
+      targetChose,
+      imageContainerSize,
+      mouseCoordinates,
+      imageName,
+    };
+    try {
+      const response = await fetch("http://localhost:3000/game", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      
+      if (response.ok) {
+        setTargetFound((prev) => {
+          const updatedTargets = [...prev];
+          updatedTargets[index] = data.result;
+          return updatedTargets;
+        });
+      }
+    } catch (error) {
+      console.error("Error requesting:", error);
+    }
   }
 
   return (
@@ -131,9 +161,14 @@ export default function Game() {
             {imagesToFind.map(
               (image, index) =>
                 !targetsFound[index] && (
-                  <button className={style.targetButton} key={image.src}>
-                    <img src={image.src} alt={image.alt} />
-                  </button>
+                  <form
+                    key={image.src}
+                    onSubmit={() => handleChoice(index + 1)}
+                  >
+                    <button className={style.targetButton} type="submit">
+                      <img src={image.src} alt={image.alt} />
+                    </button>
+                  </form>
                 )
             )}
           </div>

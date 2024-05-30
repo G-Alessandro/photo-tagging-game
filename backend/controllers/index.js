@@ -31,16 +31,19 @@ exports.game_post = asyncHandler(async (req, res) => {
   if (!imageToFind) {
     res.status(404).json({ error: 'Image not found' });
   } else {
+    const targetNumberIndex = targetChose.lastIndexOf('_');
+    const targetNumber = Number(targetChose.slice(targetNumberIndex + 1));
     const target = imageToFind.targets[targetChose];
     const minorCoordinateX = target.coordinateX.minorCoordinate;
     const majorCoordinateX = target.coordinateX.majorCoordinate;
     const minorCoordinateY = target.coordinateY.minorCoordinate;
     const majorCoordinateY = target.coordinateY.majorCoordinate;
+
     if (scaledCoordinateX >= minorCoordinateX && scaledCoordinateX <= majorCoordinateX
       && scaledCoordinateY >= minorCoordinateY && scaledCoordinateY <= majorCoordinateY) {
-      res.status(200).json({ result: true });
+      res.status(200).json({ result: true, targetNumber });
     } else {
-      res.status(200).json({ result: false });
+      res.status(200).json({ result: false, targetNumber });
     }
   }
 });

@@ -47,7 +47,7 @@ const documents = [
   {
     imageName: 'monster_hunter_world',
     imageWidth: 1467,
-    imageHeight: 1648,
+    imageHeight: 1574,
     targets: {
       target_1: {
         coordinateX: {
@@ -84,7 +84,7 @@ const documents = [
   {
     imageName: 'monster_hunter_world_iceborne',
     imageWidth: 1467,
-    imageHeight: 1783,
+    imageHeight: 1710,
     targets: {
       target_1: {
         coordinateX: {
@@ -121,7 +121,7 @@ const documents = [
   {
     imageName: 'ad_2222_character',
     imageWidth: 1467,
-    imageHeight: 2670,
+    imageHeight: 2597,
     targets: {
       target_1: {
         coordinateX: {
@@ -158,7 +158,7 @@ const documents = [
   {
     imageName: 'universe_113_infested',
     imageWidth: 1467,
-    imageHeight: 2063,
+    imageHeight: 1990,
     targets: {
       target_1: {
         coordinateX: {

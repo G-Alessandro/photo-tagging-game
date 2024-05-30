@@ -18,6 +18,10 @@ export default function Game() {
     coordinateX: null,
     coordinateY: null,
   });
+  const [mouseCoordinatesToSend, setMouseCoordinatesToSend] = useState({
+    coordinateX: null,
+    coordinateY: null,
+  });
   const [targetListPosition, setTargetListPosition] = useState({
     bottom: null,
     left: null,
@@ -66,6 +70,12 @@ export default function Game() {
       coordinateX: clickX,
       coordinateY: clickY,
     });
+    if (!mouseCircle) {
+      setMouseCoordinatesToSend({
+        coordinateX: clickX,
+        coordinateY: clickY,
+      });
+    }
     const listPosition = {
       bottom: "0px",
       right: "0px",
@@ -85,11 +95,12 @@ export default function Game() {
     const formData = {
       targetChose,
       imageContainerSize,
-      mouseCoordinates,
+      mouseCoordinatesToSend,
       imageName,
     };
+    console.log(mouseCoordinatesToSend);
     try {
-      const response = await fetch("http://localhost:3000/game", {
+      const response = await fetch(`http://localhost:3000/game`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -97,7 +108,7 @@ export default function Game() {
         body: JSON.stringify(formData),
       });
       const data = await response.json();
-      
+      console.log(data);
       if (response.ok) {
         setTargetFound((prev) => {
           const updatedTargets = [...prev];
@@ -146,7 +157,7 @@ export default function Game() {
 
       <div
         className={style.container}
-        ref={imageContainerRef}
+        // ref={imageContainerRef}
         onClick={mouseClick}
       >
         <div
@@ -163,7 +174,7 @@ export default function Game() {
                 !targetsFound[index] && (
                   <form
                     key={image.src}
-                    onSubmit={() => handleChoice(index + 1)}
+                    onSubmit={(event) => handleChoice(event, index + 1)}
                   >
                     <button className={style.targetButton} type="submit">
                       <img src={image.src} alt={image.alt} />
@@ -173,7 +184,8 @@ export default function Game() {
             )}
           </div>
         </div>
-        <img src={chosenImage} className={style.gameImg} alt="" />
+        <img src={chosenImage} className={style.gameImg} alt="" ref={imageContainerRef}
+/>
       </div>
     </>
   );

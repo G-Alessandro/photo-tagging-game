@@ -3,6 +3,9 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const UserScoreSchema = new Schema({
+  imageName: {
+    type: String,
+  },
   username: {
     type: String,
   },
@@ -14,4 +17,4 @@ const UserScoreSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model('UserScore', UserScoreSchema);
+module.exports = mongoose.model('UserScore', UserScoreSchema, 'users-score');

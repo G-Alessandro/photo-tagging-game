@@ -1,7 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const { body, validationResult } = require('express-validator');
 const UserScore = require('../models/user-score');
-const ImageTargets = require('../models/image-targets');
+const Image = require('../models/image');
 
 exports.homepage_get = asyncHandler(async (req, res) => {
   const getAllScores = await UserScore.find().sort({ time: -1 }, { timestamp: -1 });
@@ -18,14 +18,15 @@ exports.game_post = asyncHandler(async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
   const {
-    imageName, imageWidth, imageHeight, coordinateX, coordinateY, targetChose,
+    imageName, imageContainerSize, mouseCoordinatesToSend, targetChose,
   } = req.body;
-  const scaleWidthRatio = imageWidth / 1467;
-  const scaleHeightRatio = imageHeight / 1648;
-  const scaledCoordinateX = coordinateX / scaleWidthRatio;
-  const scaledCoordinateY = coordinateY / scaleHeightRatio;
 
-  const imageToFind = await ImageTargets.find({ imageName });
+  const imageToFind = await Image.findOne({ imageName });
+
+  const scaleWidthRatio = imageContainerSize.width / imageToFind.imageWidth;
+  const scaleHeightRatio = imageContainerSize.height / imageToFind.imageHeight;
+  const scaledCoordinateX = Math.floor(mouseCoordinatesToSend.coordinateX / scaleWidthRatio);
+  const scaledCoordinateY = Math.floor(mouseCoordinatesToSend.coordinateY / scaleHeightRatio);
 
   if (!imageToFind) {
     res.status(404).json({ error: 'Image not found' });
@@ -35,12 +36,11 @@ exports.game_post = asyncHandler(async (req, res) => {
     const majorCoordinateX = target.coordinateX.majorCoordinate;
     const minorCoordinateY = target.coordinateY.minorCoordinate;
     const majorCoordinateY = target.coordinateY.majorCoordinate;
-
     if (scaledCoordinateX >= minorCoordinateX && scaledCoordinateX <= majorCoordinateX
       && scaledCoordinateY >= minorCoordinateY && scaledCoordinateY <= majorCoordinateY) {
-      res.status(200).json({ targetChose: true });
+      res.status(200).json({ result: true });
     } else {
-      res.status(200).json({ targetChose: false });
+      res.status(200).json({ result: false });
     }
   }
 });

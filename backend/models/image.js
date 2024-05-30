@@ -2,8 +2,10 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const ImageTargetsSchema = new Schema({
-  image: { type: String },
+const ImageSchema = new Schema({
+  imageName: { type: String },
+  imageWidth: { type: Number },
+  imageHeight: { type: Number },
   targets: {
     target_1: {
       coordinateX: {
@@ -38,4 +40,4 @@ const ImageTargetsSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model('ImageTargets', ImageTargetsSchema);
+module.exports = mongoose.model('Image', ImageSchema, 'playable-images');

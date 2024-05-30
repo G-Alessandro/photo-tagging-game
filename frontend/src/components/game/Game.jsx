@@ -63,6 +63,7 @@ export default function Game() {
   }, []);
 
   function mouseClick(e) {
+    console.log(targetsFound);
     const clickX = e.nativeEvent.offsetX;
     const clickY = e.nativeEvent.offsetY;
     setMouseCircle(!mouseCircle);
@@ -112,7 +113,7 @@ export default function Game() {
       if (response.ok) {
         setTargetFound((prev) => {
           const updatedTargets = [...prev];
-          updatedTargets[index] = data.result;
+          updatedTargets[data.targetNumber - 1] = data.result;
           return updatedTargets;
         });
       }
@@ -155,11 +156,7 @@ export default function Game() {
         </ul>
       </div>
 
-      <div
-        className={style.container}
-        // ref={imageContainerRef}
-        onClick={mouseClick}
-      >
+      <div className={style.container} onClick={mouseClick}>
         <div
           className={style.mouseTarget}
           style={{
@@ -184,8 +181,12 @@ export default function Game() {
             )}
           </div>
         </div>
-        <img src={chosenImage} className={style.gameImg} alt="" ref={imageContainerRef}
-/>
+        <img
+          src={chosenImage}
+          className={style.gameImg}
+          alt=""
+          ref={imageContainerRef}
+        />
       </div>
     </>
   );

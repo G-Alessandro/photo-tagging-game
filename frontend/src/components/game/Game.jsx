@@ -28,7 +28,12 @@ export default function Game() {
     right: null,
   });
 
-  const [targetsFound, setTargetFound] = useState([false, false, false]);
+  // const [targetsFound, setTargetFound] = useState([false, false, false]);
+  const [targetsFound, setTargetFound] = useState([
+    { found: false, coordinateX: null, coordinateY: null },
+    { found: false, coordinateX: null, coordinateY: null },
+    { found: false, coordinateX: null, coordinateY: null },
+  ]);
 
   useEffect(() => {
     let lastSlashIndex = chosenImage.lastIndexOf("/");
@@ -113,7 +118,11 @@ export default function Game() {
       if (response.ok) {
         setTargetFound((prev) => {
           const updatedTargets = [...prev];
-          updatedTargets[data.targetNumber - 1] = data.result;
+          updatedTargets[data.targetNumber - 1] = {
+            found: data.result,
+            coordinateX: data.coordinateX || null,
+            coordinateY: data.coordinateY || null,
+          };
           return updatedTargets;
         });
       }
@@ -134,7 +143,7 @@ export default function Game() {
           <div className={style.targetsToFindContainer}>
             {imagesToFind.map((image, index) => (
               <div key={image.src} className={style.targetContainer}>
-                {targetsFound[index] && (
+                {targetsFound[index].found && (
                   <img
                     className={style.cancelImg}
                     src={CancelImg}
@@ -157,6 +166,22 @@ export default function Game() {
       </div>
 
       <div className={style.container} onClick={mouseClick}>
+        {targetsFound.map(
+          (target, index) =>
+            target.found && (
+              <div
+                key={`target_${index}`}
+                style={{
+                  position: "absolute",
+                  width: "40px",
+                  top: `${target.coordinateY + 50}px`,
+                  left: `${target.coordinateX - 20 }px`,
+                }}
+              >
+                <img src={CancelImg} alt={`image ${index + 1} found`} />
+              </div>
+            )
+        )}
         <div
           className={style.mouseTarget}
           style={{
@@ -168,7 +193,7 @@ export default function Game() {
           <div className={style.targetList} style={targetListPosition}>
             {imagesToFind.map(
               (image, index) =>
-                !targetsFound[index] && (
+                !targetsFound[index].found && (
                   <form
                     key={image.src}
                     onSubmit={(event) => handleChoice(event, index + 1)}

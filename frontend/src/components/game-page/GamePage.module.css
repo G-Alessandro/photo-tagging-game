@@ -1,0 +1,48 @@
+.topBarGame {
+  display: flex;
+  flex-direction: column;
+}
+
+.targetsToFindContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.targetContainer {
+  position: relative;
+}
+
+.cancelImg {
+  position: absolute;
+}
+
+/* .container {
+  width: 100%;
+  height: fit-content;
+  position: absolute;
+}
+
+.mouseTarget {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border: 10px solid rgb(255, 30, 30);
+  border-radius: 50%;
+}
+
+.targetList {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  gap: 5px;
+}
+
+.targetButton {
+  width: 90px;
+  height: 90px;
+}
+
+.gameImg {
+  width: 100%;
+} */

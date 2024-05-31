@@ -41,7 +41,12 @@ exports.game_post = asyncHandler(async (req, res) => {
 
     if (scaledCoordinateX >= minorCoordinateX && scaledCoordinateX <= majorCoordinateX
       && scaledCoordinateY >= minorCoordinateY && scaledCoordinateY <= majorCoordinateY) {
-      res.status(200).json({ result: true, targetNumber });
+      res.status(200).json({
+        result: true,
+        targetNumber,
+        coordinateX: mouseCoordinatesToSend.coordinateX,
+        coordinateY: mouseCoordinatesToSend.coordinateY,
+      });
     } else {
       res.status(200).json({ result: false, targetNumber });
     }

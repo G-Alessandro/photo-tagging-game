@@ -37,11 +37,13 @@ export default function MouseImageChoice({
       right: "0px",
       left: "0px",
     };
+    let bottomPx = 250;
+    targetsFound.map((target) => (target.found ? (bottomPx -= 100) : ""));
 
     listPosition.left = clickX <= imageContainerSize.width / 2 ? "65px" : "";
     listPosition.right = clickX > imageContainerSize.width / 2 ? "120px" : "";
     listPosition.bottom =
-      clickY >= imageContainerSize.height / 2 ? "250px" : "";
+      clickY >= imageContainerSize.height / 2 ? `${bottomPx}px` : "";
     setTargetListPosition(listPosition);
   }
 
@@ -98,7 +100,7 @@ export default function MouseImageChoice({
           )
       )}
       <div
-        className={style.mouseTarget}
+        className={style.mouseCircle}
         style={{
           visibility: mouseCircle ? "visible" : "hidden",
           top: `${mouseCoordinates.coordinateY + 35}px`,

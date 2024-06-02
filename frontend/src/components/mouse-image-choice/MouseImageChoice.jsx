@@ -3,7 +3,7 @@ import style from "./MouseImageChoice.module.css";
 
 export default function MouseImageChoice({
   chosenImage,
-  imageContainerRef,
+  imageRef,
   imageName,
   targetsFound,
   setTargetFound,
@@ -127,7 +127,7 @@ export default function MouseImageChoice({
         src={chosenImage}
         className={style.gameImg}
         alt=""
-        ref={imageContainerRef}
+        ref={imageRef}
       />
     </div>
   );

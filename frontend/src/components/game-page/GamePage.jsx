@@ -1,15 +1,14 @@
 import { useState, useRef, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import GamePageTop from "../game-page-top/GamePageTop";
 import MouseImageChoice from "../mouse-image-choice/MouseImageChoice";
-import CancelImg from "../../assets/svg/cancel-green.svg";
-import style from "./GamePage.module.css";
 
 export default function Game() {
   const location = useLocation();
   const chosenImage = location.state?.image;
   const [imageName, setImageName] = useState(null);
   const [imagesToFind, setImagesToFind] = useState([]);
-  const imageContainerRef = useRef(null);
+  const imageRef = useRef(null);
   const [imageContainerSize, setImageContainerSize] = useState({
     width: 0,
     height: 0,
@@ -54,9 +53,10 @@ export default function Game() {
 
   useEffect(() => {
     const updateSize = () => {
-      if (imageContainerRef.current) {
-        const width = imageContainerRef.current.offsetWidth;
-        const height = imageContainerRef.current.offsetHeight;
+      if (imageRef.current) {
+        const width = imageRef.current.offsetWidth;
+        const height = imageRef.current.offsetHeight;
+        console.log("Width:", width, "Height:", height);
         setImageContainerSize({ width, height });
       }
     };
@@ -69,40 +69,16 @@ export default function Game() {
 
   return (
     <>
-      <div className={style.topBarGame}>
-        <Link to="/">Main Menu</Link>
-        <div>
-          <h2>Time: </h2>
-        </div>
-        <div>
-          <h2>Find:</h2>
-          <div className={style.targetsToFindContainer}>
-            {imagesToFind.map((image, index) => (
-              <div key={image.src} className={style.targetContainer}>
-                {targetsFound[index].found && (
-                  <img
-                    className={style.cancelImg}
-                    src={CancelImg}
-                    alt={`image ${index + 1} found`}
-                  />
-                )}
-                <img src={image.src} alt={image.alt} />
-              </div>
-            ))}
-          </div>
-        </div>
-        <ul>
-          <li>
-            coordinateX: {mouseCoordinates.coordinateX} coordinateY:{" "}
-            {mouseCoordinates.coordinateY}
-          </li>
-          <li> Container width: {imageContainerSize.width}</li>
-          <li> Container height: {imageContainerSize.height}</li>
-        </ul>
-      </div>
+      <GamePageTop
+        imagesToFind={imagesToFind}
+        targetsFound={targetsFound}
+        mouseCoordinates={mouseCoordinates}
+        imageContainerSize={imageContainerSize}
+      />
+
       <MouseImageChoice
         chosenImage={chosenImage}
-        imageContainerRef={imageContainerRef}
+        imageRef={imageRef}
         imageName={imageName}
         targetsFound={targetsFound}
         setTargetFound={setTargetFound}

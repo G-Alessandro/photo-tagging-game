@@ -1,0 +1,17 @@
+.topBarGame {
+  display: flex;
+  flex-direction: column;
+}
+
+.targetsToFindContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.targetContainer {
+  position: relative;
+}
+
+.cancelImg {
+  position: absolute;
+}

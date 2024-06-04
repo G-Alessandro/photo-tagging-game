@@ -3,15 +3,6 @@ const { body, validationResult } = require('express-validator');
 const UserScore = require('../models/user-score');
 const Image = require('../models/image');
 
-exports.homepage_get = asyncHandler(async (req, res) => {
-  const getAllScores = await UserScore.find().sort({ time: -1 }, { timestamp: -1 });
-  if (!getAllScores) {
-    res.status(204).json({ error: 'Scores not available' });
-  } else {
-    res.status(200).json(getAllScores);
-  }
-});
-
 exports.game_post = asyncHandler(async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -50,6 +41,15 @@ exports.game_post = asyncHandler(async (req, res) => {
     } else {
       res.status(200).json({ result: false, targetNumber });
     }
+  }
+});
+
+exports.score_get = asyncHandler(async (req, res) => {
+  const getAllScores = await UserScore.find({ imageName: req.params.imageName }).sort({ time: -1 }, { timestamp: -1 });
+  if (!getAllScores) {
+    res.status(204).json({ error: 'Scores not available' });
+  } else {
+    res.status(200).json(getAllScores);
   }
 });
 

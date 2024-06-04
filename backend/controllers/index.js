@@ -45,7 +45,7 @@ exports.game_post = asyncHandler(async (req, res) => {
 });
 
 exports.score_get = asyncHandler(async (req, res) => {
-  const getAllScores = await UserScore.find({ imageName: req.params.imageName }).sort({ time: -1 }, { timestamp: -1 });
+  const getAllScores = await UserScore.find({ imageName: req.params.imageName }).sort({ time: 1 }, { timestamp: -1 });
   if (!getAllScores) {
     res.status(204).json({ error: 'Scores not available' });
   } else {

@@ -7,13 +7,10 @@ export default function GamePageTop({
   time,
   setTime,
   isRunning,
-  setIsRunning,
   imagesToFind,
   targetsFound,
-  mouseCoordinates,
   imageContainerSize,
 }) {
-
   useEffect(() => {
     let intervalId;
     if (isRunning) {
@@ -28,7 +25,7 @@ export default function GamePageTop({
   const milliseconds = time % 100;
 
   return (
-    <div className={style.topBarGame} >
+    <div className={style.topBarGame}>
       <Link to="/">Main Menu</Link>
       <div>
         <h2>Time: </h2>
@@ -55,14 +52,10 @@ export default function GamePageTop({
           ))}
         </div>
       </div>
-      <ul>
-        <li>
-          coordinateX: {mouseCoordinates.coordinateX} coordinateY:{" "}
-          {mouseCoordinates.coordinateY}
-        </li>
-        <li> Container width: {imageContainerSize.width}</li>
-        <li> Container height: {imageContainerSize.height}</li>
-      </ul>
+      <div>
+        <p> Container width: {imageContainerSize.width}</p>
+        <p> Container height: {imageContainerSize.height}</p>
+      </div>
     </div>
   );
 }

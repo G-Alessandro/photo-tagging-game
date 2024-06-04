@@ -18,7 +18,6 @@ export default function VictoryScreen({ time, imageName}) {
       time: time,
       timestamp: today,
     };
-    console.log(formData);
     try {
       const response = await fetch("http://localhost:3000/score", {
         method: "POST",
@@ -28,7 +27,6 @@ export default function VictoryScreen({ time, imageName}) {
         body: JSON.stringify(formData),
       });
       if (response.ok) {
-        console.log("Navigating to home");
         navigate("/");
       }
     } catch (error) {

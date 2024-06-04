@@ -91,10 +91,8 @@ export default function GamePage() {
         time={time}
         setTime={setTime}
         isRunning={isRunning}
-        setIsRunning={setIsRunning}
         imagesToFind={imagesToFind}
         targetsFound={targetsFound}
-        mouseCoordinates={mouseCoordinates}
         imageContainerSize={imageContainerSize}
       />
 

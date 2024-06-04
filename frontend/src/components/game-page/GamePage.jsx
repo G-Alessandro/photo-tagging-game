@@ -2,8 +2,10 @@ import { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import GamePageTop from "../game-page-top/GamePageTop";
 import MouseImageChoice from "../mouse-image-choice/MouseImageChoice";
+import VictoryScreen from "../victory-screen/VictoryScreen";
+import style from "./GamePage.module.css";
 
-export default function Game() {
+export default function GamePage() {
   const location = useLocation();
   const chosenImage = location.state?.image;
   const [imageName, setImageName] = useState(null);
@@ -27,12 +29,24 @@ export default function Game() {
     left: null,
     right: null,
   });
-
   const [targetsFound, setTargetFound] = useState([
     { found: false, coordinateX: null, coordinateY: null },
     { found: false, coordinateX: null, coordinateY: null },
     { found: false, coordinateX: null, coordinateY: null },
   ]);
+
+  const [time, setTime] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+
+  const startAndStop = () => {
+    setIsRunning(!isRunning);
+  };
+
+  useEffect(() => {
+    if (targetsFound.every((target) => target.found)) {
+      setIsRunning(false);
+    }
+  }, [targetsFound]);
 
   useEffect(() => {
     let lastSlashIndex = chosenImage.lastIndexOf("/");
@@ -49,6 +63,7 @@ export default function Game() {
     }
     setImageName(imageNameNoPath);
     setImagesToFind(images);
+    startAndStop();
   }, [chosenImage]);
 
   useEffect(() => {
@@ -69,7 +84,14 @@ export default function Game() {
 
   return (
     <>
+      {targetsFound.every((target) => target.found) && (
+        <VictoryScreen time={time} imageName={imageName} />
+      )}
       <GamePageTop
+        time={time}
+        setTime={setTime}
+        isRunning={isRunning}
+        setIsRunning={setIsRunning}
         imagesToFind={imagesToFind}
         targetsFound={targetsFound}
         mouseCoordinates={mouseCoordinates}

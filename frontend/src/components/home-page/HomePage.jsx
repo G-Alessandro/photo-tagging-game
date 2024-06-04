@@ -57,7 +57,7 @@ export default function HomePage() {
       <div>
         {usersScore &&
           usersScore.map((score) => (
-            <div key={score.username}>
+            <div key={score.username + score.timestamp}>
               <p>{score.username}</p>
               <p>{score.time}</p>
             </div>

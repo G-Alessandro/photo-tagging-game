@@ -66,3 +66,32 @@
   width: 300px;
   height: 300px;
 }
+
+@media screen and (max-width: 500px) {
+
+  .homepageContainer {
+    padding-bottom: 15px;
+  }  
+
+  .linksContainer {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .scoreboardLinkContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .homepageContainer>h1 {
+    font-size: 30px;
+  }
+
+  .scoreboardLinkContainer>div>h2 {
+    font-size: 20px;
+  }
+
+
+}

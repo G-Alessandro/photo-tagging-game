@@ -45,72 +45,77 @@ export default function Scoreboard() {
           behavior: "smooth",
         });
       }
-    } else {
-      alert("Name not found");
     }
   };
 
   return (
     <div className={style.scoreboardContainer}>
       <h2>SCOREBOARD</h2>
-      <div>
-        <select onChange={changeScores}>
-          <option value="monster_hunter_world">Monster Hunter World</option>
-          <option value="monster_hunter_world_iceborne">
-            Monster Hunter World Iceborne
-          </option>
-          <option value="ad_2222_character">AD 2222 Character</option>
-          <option value="universe_113_infested">Universe 113 Infested</option>
-        </select>
-        <div>
-          <input
-            type="text"
-            placeholder="Search Player Name"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <button onClick={handleSearch}>
-            <img
-              src={SearchSVG}
-              className={style.searchSVG}
-              alt="search player name"
+      <div className={style.scoreboard}>
+        <div className={style.selectSearchContainer}>
+          <select onChange={changeScores}>
+            <option value="monster_hunter_world">Monster Hunter World</option>
+            <option value="monster_hunter_world_iceborne">
+              Monster Hunter World Iceborne
+            </option>
+            <option value="ad_2222_character">AD 2222 Character</option>
+            <option value="universe_113_infested">Universe 113 Infested</option>
+          </select>
+          <div className={style.searchContainer}>
+            <input
+              type="text"
+              placeholder="Search Player Name"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className={style.inputSearch}
             />
-          </button>
+            <button onClick={handleSearch}>
+              <img
+                src={SearchSVG}
+                className={style.searchSVG}
+                alt="search player name"
+              />
+            </button>
+          </div>
         </div>
+        <dir ref={scoresContainerRef} className={style.scoresContainer}>
+          {usersScore &&
+            usersScore.map((score, index) => {
+              const hours = Math.floor(score.time / 360000);
+              const minutes = Math.floor((score.time % 360000) / 6000);
+              const seconds = Math.floor((score.time % 6000) / 100);
+              const milliseconds = score.time % 100;
+
+              let scoreRankClass = style.scoreRank;
+              if (index === 0) scoreRankClass += ` ${style.firstRank}`;
+              if (index === 1) scoreRankClass += ` ${style.secondRank}`;
+              if (index === 2) scoreRankClass += ` ${style.thirdRank}`;
+
+              return (
+                <div
+                  key={score.username + index}
+                  ref={(el) => (scoreRefs.current[index] = el)}
+                  className={style.scoreContainer}
+                >
+                  <div className={scoreRankClass}>
+                    <p>{index + 1}</p>
+                  </div>
+                  <div className={style.scoreNameTimeContainer}>
+                    <p className={style.scoreName}>{score.username}</p>
+                    <p className={style.scoreTime}>
+                      {hours}h {minutes.toString().padStart(2, "0")}m{" "}
+                      {seconds.toString().padStart(2, "0")}s{" "}
+                      {milliseconds.toString().padStart(2, "0")}ms
+                    </p>
+                    <p>{score.timestamp}</p>
+                  </div>
+                </div>
+              );
+            })}
+          {usersScore === null ||
+            (usersScore.length === 0 && <p className={style.noScores}>No scores available</p>)}
+        </dir>
       </div>
-      <dir
-        ref={scoresContainerRef}
-        style={{
-          height: "300px",
-          overflowY: "auto",
-          border: "1px solid black",
-        }}
-      >
-        {usersScore &&
-          usersScore.map((score, index) => {
-            const hours = Math.floor(score.time / 360000);
-            const minutes = Math.floor((score.time % 360000) / 6000);
-            const seconds = Math.floor((score.time % 6000) / 100);
-            const milliseconds = score.time % 100;
-            return (
-              <div
-                key={score.username + index}
-                ref={(el) => (scoreRefs.current[index] = el)}
-              >
-                <p>{index + 1}</p>
-                <p>{score.username}</p>
-                <p>
-                  {hours}:{minutes.toString().padStart(2, "0")}:
-                  {seconds.toString().padStart(2, "0")}:
-                  {milliseconds.toString().padStart(2, "0")}
-                </p>
-                <p>{score.timestamp}</p>
-              </div>
-            );
-          })}
-        {usersScore === null ||
-          (usersScore.length === 0 && <p>No score aviable</p>)}
-      </dir>
     </div>
   );
 }

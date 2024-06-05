@@ -1,10 +1,165 @@
 .scoreboardContainer {
   display: flex;
   flex-direction: column;
-  border: 2px solid black;
+}
+
+.scoreboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  padding: 20px;
+  margin-top: 5px;
+  background-color: white;
+  border:4px solid #ff3caf;
+}
+
+.selectSearchContainer>select {
+  font-size: 20px;
+  font-weight: 900;
+  height: 50px;
+  outline: none;
+  border:4px solid #ff3caf;
+  background-color: white;
+}
+
+.selectSearchContainer>select:active {
+  border:4px solid #5cff3c;
+}
+
+.searchContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  gap: 5px;
+}
+
+.inputSearch {
+  height: 50px;
+  font-size: 20px;
+  font-weight: 900;
+  border:4px solid #ff3caf;
+  text-indent: 5px;
+  outline: none;
+}
+
+.inputSearch:focus {
+  border:4px solid #5cff3c;
+}
+
+.searchContainer>button {
+  width: 55px;
+  height: 55px;
+  background-color: white;
+  padding: 5px;
+  border:4px solid #ff3caf;
+}
+
+.searchContainer>button:hover {
+  border:4px solid #5cff3c;
 }
 
 .searchSVG {
-  width: 20px;
-  height: 20px;
+  width: 100%;
+  height: 100%;
+}
+
+.scoresContainer {
+  width: 100%;
+  height: 350px;
+  overflow-y: auto;
+  border:4px solid #ff3caf;
+  border-left: 0px;
+  border-right: 0px;
+  padding: 15px 0px;
+  margin-top: 20px;
+}
+
+.scoreContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.scoreRank {
+  display: flex;
+  align-items: center;
+  border: 2px solid black;
+  padding: 10px;
+}
+
+.scoreRank.firstRank {
+  background-color: rgb(255, 224, 46);
+  border: 2px rgb(255, 224, 46);
+}
+
+.scoreRank.secondRank {
+  background-color: rgb(220, 220, 220);
+  border: 2px rgb(220, 220, 220);
+}
+
+.scoreRank.thirdRank {
+  background-color: rgb(99, 0, 0);
+  color: white;
+  border: 2px rgb(212, 0, 0);
+}
+
+.scoreRank>p {
+  width: 30px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.scoreNameTimeContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.scoreNameTimeContainer>.scoreName {
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.scoreNameTimeContainer>.scoreTime {
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.noScores{
+  font-size: 30px;
+  font-weight: 900;
+}
+
+@media screen and (max-width: 500px) {
+
+  .scoreboard {
+    width: 300px;
+    padding: 0px 5px;
+  }
+
+  .scoresContainer {
+    height: 200px;
+    border:4px solid #ff3caf;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 0px;
+    padding: 5px 0px;
+  }
+
+  .selectSearchContainer {
+    width: 300px;
+  }
+
+  .selectSearchContainer>select {
+    width: 300px;
+    margin-top: 10px;
+  }
+
+  .inputSearch {
+    width: 230px;
+  }
+
 }

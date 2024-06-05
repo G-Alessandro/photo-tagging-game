@@ -1,5 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const { body, validationResult } = require('express-validator');
+const { format } = require('date-fns');
+const he = require('he');
 const UserScore = require('../models/user-score');
 const Image = require('../models/image');
 
@@ -45,11 +47,17 @@ exports.game_post = asyncHandler(async (req, res) => {
 });
 
 exports.score_get = asyncHandler(async (req, res) => {
-  const getAllScores = await UserScore.find({ imageName: req.params.imageName }).sort({ time: 1 }, { timestamp: -1 });
-  if (!getAllScores) {
+  const getScores = await UserScore.find({ imageName: req.params.imageName })
+    .sort({ time: 1 }, { timestamp: -1 });
+  const formattedScores = getScores.map((score) => ({
+    ...score.toObject(),
+    timestamp: format(new Date(score.timestamp), 'EEEE dd MMMM yyyy'),
+    username: he.decode(score.username),
+  }));
+  if (!getScores) {
     res.status(204).json({ error: 'Scores not available' });
   } else {
-    res.status(200).json(getAllScores);
+    res.status(200).json(formattedScores);
   }
 });
 

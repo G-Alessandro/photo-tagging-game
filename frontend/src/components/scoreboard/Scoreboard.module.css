@@ -1,0 +1,10 @@
+.scoreboardContainer {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid black;
+}
+
+.searchSVG {
+  width: 20px;
+  height: 20px;
+}

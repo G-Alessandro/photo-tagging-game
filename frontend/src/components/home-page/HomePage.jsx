@@ -7,43 +7,50 @@ import universe113InfestedImg from "../../assets/images/universe-113-infested/un
 import style from "./HomePage.module.css";
 
 export default function HomePage() {
-  
   return (
     <>
-      <h1>Find the picture game</h1>
-      <div>
-        <div>
-          <h2>Choose the image</h2>
-          <Link to="/game-page" state={{ image: monsterHunterWorldImg }}>
-            <img
-              src={monsterHunterWorldImg}
-              alt="representation of the monster hunter world video game with its diversity of fauna and flora"
-            />
-          </Link>
-          <Link
-            to="/game-page"
-            state={{ image: monsterHunterWorldIceborneImg }}
-          >
-            <img
-              src={monsterHunterWorldIceborneImg}
-              alt="representation of the monster hunter world iceborne video game with its diversity of fauna and flora"
-            />
-          </Link>
-          <Link to="/game-page" state={{ image: ad2222CharacterImg }}>
-            <img
-              src={ad2222CharacterImg}
-              alt="representation of multiple animation characters or memes"
-            />
-          </Link>
-          <Link to="/game-page" state={{ image: universe113InfestedImg }}>
-            <img
-              src={universe113InfestedImg}
-              alt="representation of multiple characters from animation, meme or film"
-            />
-          </Link>
+      <div className={style.homepageContainer}>
+        <h1>FIND THE PICTURE GAME</h1>
+        <div className={style.scoreboardLinkContainer}>
+          <div>
+            <h2>CHOOSE THE IMAGE TO PLAY</h2>
+            <div className={style.linksContainer}>
+              <Link to="/game-page" state={{ image: monsterHunterWorldImg }}>
+                <h3>Monster Hunter World</h3>
+                <img
+                  src={monsterHunterWorldImg}
+                  alt="representation of the monster hunter world video game with its diversity of fauna and flora"
+                />
+              </Link>
+              <Link
+                to="/game-page"
+                state={{ image: monsterHunterWorldIceborneImg }}
+              >
+                <h3>Monster Hunter World Iceborne</h3>
+                <img
+                  src={monsterHunterWorldIceborneImg}
+                  alt="representation of the monster hunter world iceborne video game with its diversity of fauna and flora"
+                />
+              </Link>
+              <Link to="/game-page" state={{ image: ad2222CharacterImg }}>
+                <h3>AD 2222 Character</h3>
+                <img
+                  src={ad2222CharacterImg}
+                  alt="representation of multiple animation characters or memes"
+                />
+              </Link>
+              <Link to="/game-page" state={{ image: universe113InfestedImg }}>
+                <h3>Universe 113 Infested</h3>
+                <img
+                  src={universe113InfestedImg}
+                  alt="representation of multiple characters from animation, meme or film"
+                />
+              </Link>
+            </div>
+          </div>
+          <Scoreboard />
         </div>
       </div>
-      <Scoreboard />
     </>
   );
 }

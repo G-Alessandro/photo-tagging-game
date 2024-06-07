@@ -91,7 +91,7 @@ export default function MouseImageChoice({
               style={{
                 position: "absolute",
                 width: "40px",
-                top: `${target.coordinateY + 50}px`,
+                top: `${target.coordinateY + 120}px`,
                 left: `${target.coordinateX - 20}px`,
               }}
             >
@@ -103,7 +103,7 @@ export default function MouseImageChoice({
         className={style.mouseCircle}
         style={{
           visibility: mouseCircle ? "visible" : "hidden",
-          top: `${mouseCoordinates.coordinateY + 35}px`,
+          top: `${mouseCoordinates.coordinateY + 105}px`,
           left: `${mouseCoordinates.coordinateX - 35}px`,
         }}
       >

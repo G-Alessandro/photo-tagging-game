@@ -93,7 +93,6 @@ export default function GamePage() {
         isRunning={isRunning}
         imagesToFind={imagesToFind}
         targetsFound={targetsFound}
-        imageContainerSize={imageContainerSize}
       />
 
       <MouseImageChoice

@@ -9,7 +9,6 @@ export default function GamePageTop({
   isRunning,
   imagesToFind,
   targetsFound,
-  imageContainerSize,
 }) {
   useEffect(() => {
     let intervalId;
@@ -27,34 +26,36 @@ export default function GamePageTop({
   return (
     <div className={style.topBarGame}>
       <Link to="/">Main Menu</Link>
-      <div>
-        <h2>Time: </h2>
+      <div className={style.timeContainer}>
+        <h2>TIME</h2>
         <p>
           {hours}:{minutes.toString().padStart(2, "0")}:
           {seconds.toString().padStart(2, "0")}:
           {milliseconds.toString().padStart(2, "0")}
         </p>
       </div>
-      <div>
-        <h2>Find:</h2>
+      <div className={style.targetsContainer}>
+        <h2>FIND</h2>
         <div className={style.targetsToFindContainer}>
-          {imagesToFind.map((image, index) => (
-            <div key={image.src} className={style.targetContainer}>
-              {targetsFound[index].found && (
-                <img
-                  className={style.cancelImg}
-                  src={CancelImg}
-                  alt={`image ${index + 1} found`}
-                />
-              )}
-              <img src={image.src} alt={image.alt} />
-            </div>
-          ))}
+          {imagesToFind.map((image, index) => {
+            let targetContainerClass = style.targetContainer;
+            if (index === 1)
+              targetContainerClass += ` ${style.targetContainerMiddle}`;
+
+            return (
+              <div key={image.src} className={targetContainerClass}>
+                {targetsFound[index].found && (
+                  <img
+                    className={style.cancelImg}
+                    src={CancelImg}
+                    alt={`image ${index + 1} found`}
+                  />
+                )}
+                <img src={image.src} alt={image.alt} />
+              </div>
+            );
+          })}
         </div>
-      </div>
-      <div>
-        <p> Container width: {imageContainerSize.width}</p>
-        <p> Container height: {imageContainerSize.height}</p>
       </div>
     </div>
   );

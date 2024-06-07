@@ -51,7 +51,7 @@ export default function GamePageTop({
                     alt={`image ${index + 1} found`}
                   />
                 )}
-                <img src={image.src} alt={image.alt} />
+                <img src={image.src} alt={image.alt} className={style.targetImg}/>
               </div>
             );
           })}

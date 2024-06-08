@@ -70,7 +70,6 @@ export default function GamePage() {
       if (imageRef.current) {
         const width = imageRef.current.offsetWidth;
         const height = imageRef.current.offsetHeight;
-        console.log("Width:", width, "Height:", height);
         setImageContainerSize({ width, height });
       }
     };

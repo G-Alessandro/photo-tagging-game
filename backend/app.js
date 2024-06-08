@@ -10,7 +10,7 @@ require('dotenv').config();
 const indexRouter = require('./routes/index');
 
 const mongoDB = process.env.MONGO_URI;
-const allowedOrigin = process.env.ALLOWED_ORIGIN || '';
+const allowedOrigin = process.env.ALLOWED_ORIGIN;
 
 const app = express();
 

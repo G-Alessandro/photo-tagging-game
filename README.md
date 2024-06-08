@@ -2,7 +2,7 @@
 
 <p>Photo-tagging-game created to put into practice everything I learned during The Odin Project course.</p>
 
-<a href="https://phenomenal-boba-5afc6c.netlify.app/" target="_blank">Live preview</a>
+<a href="https://fluffy-empanada-a2d6c3.netlify.app/" target="_blank">Live preview</a>
 
 <h3>Credit:</H3>
 

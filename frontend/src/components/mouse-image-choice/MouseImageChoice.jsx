@@ -57,13 +57,17 @@ export default function MouseImageChoice({
       imageName,
     };
     try {
-      const response = await fetch(`https://photo-tagging-game-the-odin-project.fly.dev/game`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        `https://photo-tagging-game-the-odin-project.fly.dev/game`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          mode: "cors",
+          body: JSON.stringify(formData),
+        }
+      );
       const data = await response.json();
       if (response.ok) {
         setTargetFound((prev) => {

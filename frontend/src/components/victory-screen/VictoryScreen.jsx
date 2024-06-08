@@ -21,13 +21,17 @@ export default function VictoryScreen({ time, imageName }) {
       timestamp: today,
     };
     try {
-      const response = await fetch("https://photo-tagging-game-the-odin-project.fly.dev/score", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://photo-tagging-game-the-odin-project.fly.dev/score",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          mode: "cors",
+          body: JSON.stringify(formData),
+        }
+      );
       if (response.ok) {
         navigate("/");
       }
@@ -46,7 +50,12 @@ export default function VictoryScreen({ time, imageName }) {
         </div>
         <div className={style.victoryUsernameContainer}>
           <label htmlFor="username">USERNAME</label>
-          <input type="text" id="username" name="username" placeholder="Enter a name"/>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter a name"
+          />
         </div>
         <div className={style.victoryTimeContainer}>
           <h2>TIME SCORE</h2>

@@ -12,12 +12,16 @@ export default function Scoreboard() {
   const scoreRefs = useRef([]);
 
   useEffect(() => {
-    fetch(`https://photo-tagging-game-the-odin-project.fly.dev/score/${chosenScoreImage}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    fetch(
+      `https://photo-tagging-game-the-odin-project.fly.dev/score/${chosenScoreImage}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        mode: "cors",
+      }
+    )
       .then((res) => res.json())
       .then((data) => setUsersScore(data));
   }, [chosenScoreImage]);
@@ -113,7 +117,9 @@ export default function Scoreboard() {
               );
             })}
           {usersScore === null ||
-            (usersScore.length === 0 && <p className={style.noScores}>No scores available</p>)}
+            (usersScore.length === 0 && (
+              <p className={style.noScores}>No scores available</p>
+            ))}
         </dir>
       </div>
     </div>

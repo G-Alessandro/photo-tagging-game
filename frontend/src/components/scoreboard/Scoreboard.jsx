@@ -12,7 +12,7 @@ export default function Scoreboard() {
   const scoreRefs = useRef([]);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/score/${chosenScoreImage}`, {
+    fetch(`https://photo-tagging-game-the-odin-project.fly.dev/score/${chosenScoreImage}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

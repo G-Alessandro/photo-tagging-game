@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import GamePageTop from "../game-page-top/GamePageTop";
 import MouseImageChoice from "../mouse-image-choice/MouseImageChoice";
 import VictoryScreen from "../victory-screen/VictoryScreen";
-import style from "./GamePage.module.css";
 
 export default function GamePage() {
   const location = useLocation();

@@ -21,7 +21,7 @@ export default function VictoryScreen({ time, imageName }) {
       timestamp: today,
     };
     try {
-      const response = await fetch("http://localhost:3000/score", {
+      const response = await fetch("https://photo-tagging-game-the-odin-project.fly.dev/score", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

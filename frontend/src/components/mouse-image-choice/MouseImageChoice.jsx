@@ -57,7 +57,7 @@ export default function MouseImageChoice({
       imageName,
     };
     try {
-      const response = await fetch(`http://localhost:3000/game`, {
+      const response = await fetch(`https://photo-tagging-game-the-odin-project.fly.dev/game`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

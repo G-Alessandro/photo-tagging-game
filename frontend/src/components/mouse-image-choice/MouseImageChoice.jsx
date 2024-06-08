@@ -103,7 +103,10 @@ export default function MouseImageChoice({
         className={style.mouseCircle}
         style={{
           visibility: mouseCircle ? "visible" : "hidden",
-          top: `${mouseCoordinates.coordinateY + 105}px`,
+          top: `${
+            mouseCoordinates.coordinateY +
+            (imageContainerSize.width <= 500 ? 157 : 105)
+          }px`,
           left: `${mouseCoordinates.coordinateX - 35}px`,
         }}
       >
@@ -123,12 +126,7 @@ export default function MouseImageChoice({
           )}
         </div>
       </div>
-      <img
-        src={chosenImage}
-        className={style.gameImg}
-        alt=""
-        ref={imageRef}
-      />
+      <img src={chosenImage} className={style.gameImg} alt="" ref={imageRef} />
     </div>
   );
 }

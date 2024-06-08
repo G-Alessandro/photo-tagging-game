@@ -51,6 +51,7 @@
 }
 
 @media screen and (max-width: 500px) {
+
   .targetButton>img {
     width: 80px;
     height: 80px;

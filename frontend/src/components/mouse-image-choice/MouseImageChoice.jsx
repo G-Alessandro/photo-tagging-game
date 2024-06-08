@@ -95,7 +95,7 @@ export default function MouseImageChoice({
               style={{
                 position: "absolute",
                 width: "40px",
-                top: `${target.coordinateY + 120}px`,
+                top: `${target.coordinateY + (imageContainerSize.width <= 500 ? 160 : 120)}px`,
                 left: `${target.coordinateX - 20}px`,
               }}
             >

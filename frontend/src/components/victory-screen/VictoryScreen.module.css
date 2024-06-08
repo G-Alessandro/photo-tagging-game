@@ -1,13 +1,10 @@
 .formContainer{
-  position: absolute;
+  height: 100%;
+  width: 100%;
+  position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  width: 100%;
-  /* top: 30%;
-  left: 30%;
-  right: 30%; */
   z-index: 1;
   background-color: rgba(0, 0, 0, 0.332);
 }
@@ -15,9 +12,128 @@
 .formContainer>form {
   display: flex;
   flex-direction: column;
-  background-color: rgb(255, 255, 255);
+  align-items: center;
+  padding: 20px;
+  background-color:rgb(255 206 77);
+  border: 4px solid #ff3caf;
+  border-radius: 5px;
 }
 
-.formContainer>button {
+.victoryMessageContainer {
+  display: flex;
+  align-items: center;
+  background-color: #ff3caf;
+  gap: 5px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.victoryMessageContainer>h2 {
+  font-weight: 900;
+  color: white;
+}
+
+.victoryMessageContainer>img {
+  width: 60px;
+}
+
+.victoryUsernameContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  background-color: #ff3caf;
+  border-radius: 5px;
+}
+
+.victoryUsernameContainer>label {
+  color: white;
+  font-size: 25px;
+  font-weight: 900;
+  padding: 5px;
+  padding-bottom: 0px;
+}
+
+.victoryUsernameContainer>input {
+  text-align: center;
+  font-size: 25px;
+  font-weight: 900;
+  padding: 4px;
+  border: 4px solid #ff3caf;
+  border-radius: 5px;
+  outline: none;
+}
+
+.victoryUsernameContainer>input:focus {
+  border:4px solid #5cff3c;
+}
+
+.victoryTimeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  background-color: #ff3caf;
+  margin-top: 20px;
+}
+
+.victoryTimeContainer>h2 {
+  font-size: 25px;
+  font-weight: 900;
+  padding: 5px;
+}
+
+.victoryTimeContainer>p {
+  font-size: 30px;
+  font-weight: 900;
+  background-color: black;
+  padding: 10px;
+}
+
+
+.formContainer>form>button {
   width: fit-content;
+  color: white;
+  font-size: 30px;
+  font-weight: 900;
+  padding: 10px;
+  background-color: #ff3caf;
+  border: none;
+  border-radius: 5px;
+  margin-top: 20px;
+  transition: transform .2s;
+}
+
+.formContainer>form>button:hover {
+  transform: scale(1.1);
+}
+
+@media screen and (max-width: 500px) {
+
+  .victoryMessageContainer {
+    gap: 0px;
+  }
+
+  .victoryMessageContainer>h2 {
+    width: fit-content;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .victoryMessageContainer>img {
+    width: 40px;
+  }
+
+  .victoryUsernameContainer>label {
+    font-size: 20px;
+  }
+  
+  .victoryUsernameContainer>input {
+    font-size: 20px;
+  }
+  
+  .victoryTimeContainer>p {
+    font-size: 20px;
+    padding: 5px;
+  }
 }

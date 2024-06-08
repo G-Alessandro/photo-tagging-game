@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
+import PartyPopperLeftSvg from "../../assets/svg/party-popper-left.svg";
+import PartyPopperRightSvg from "../../assets/svg/party-popper-right.svg";
 import style from "./VictoryScreen.module.css";
 
-export default function VictoryScreen({ time, imageName}) {
+export default function VictoryScreen({ time, imageName }) {
   const navigate = useNavigate();
   const hours = Math.floor(time / 360000);
   const minutes = Math.floor((time % 360000) / 6000);
@@ -37,16 +39,24 @@ export default function VictoryScreen({ time, imageName}) {
   return (
     <div className={style.formContainer}>
       <form onSubmit={handleSubmit}>
-        <h2>Congratulations you found all the images!</h2>
-        <label htmlFor="username">Username</label>
-        <input type="text" id="username" name="username" />
-        <p>Time Score</p>
-        <p>
-          {hours}:{minutes.toString().padStart(2, "0")}:
-          {seconds.toString().padStart(2, "0")}:
-          {milliseconds.toString().padStart(2, "0")}
-        </p>
-        <button type="submit" >Save</button>
+        <div className={style.victoryMessageContainer}>
+          <img src={PartyPopperLeftSvg} />
+          <h2>Congratulations you found all the images!</h2>
+          <img src={PartyPopperRightSvg} alt="" />
+        </div>
+        <div className={style.victoryUsernameContainer}>
+          <label htmlFor="username">USERNAME</label>
+          <input type="text" id="username" name="username" placeholder="Enter a name"/>
+        </div>
+        <div className={style.victoryTimeContainer}>
+          <h2>TIME SCORE</h2>
+          <p>
+            {hours}h {minutes.toString().padStart(2, "0")}m{" "}
+            {seconds.toString().padStart(2, "0")}s{" "}
+            {milliseconds.toString().padStart(2, "0")}ms
+          </p>
+        </div>
+        <button type="submit">SAVE</button>
       </form>
     </div>
   );

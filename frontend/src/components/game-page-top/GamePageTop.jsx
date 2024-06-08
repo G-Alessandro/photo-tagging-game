@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import CancelImg from "../../assets/svg/cancel-green.svg";
+import CancelImg from "/assets/svg/cancel-green.svg";
 import style from "./GamePageTop.module.css";
 
 export default function GamePageTop({

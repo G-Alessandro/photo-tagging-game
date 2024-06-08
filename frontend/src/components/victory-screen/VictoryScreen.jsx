@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import PartyPopperLeftSvg from "../../assets/svg/party-popper-left.svg";
-import PartyPopperRightSvg from "../../assets/svg/party-popper-right.svg";
+import PartyPopperLeftSvg from "/assets/svg/party-popper-left.svg";
+import PartyPopperRightSvg from "/assets/svg/party-popper-right.svg";
 import style from "./VictoryScreen.module.css";
 
 export default function VictoryScreen({ time, imageName }) {

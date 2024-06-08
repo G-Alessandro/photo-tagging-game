@@ -1,4 +1,4 @@
-import CancelImg from "../../assets/svg/cancel-green.svg";
+import CancelImg from "/assets/svg/cancel-green.svg";
 import style from "./MouseImageChoice.module.css";
 
 export default function MouseImageChoice({

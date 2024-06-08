@@ -53,7 +53,6 @@ export default function GamePage() {
     let updatedPath = chosenImage.substring(0, lastSlashIndex);
     const imageNameNoPath = chosenImage.slice(lastSlashIndex + 1, lastDotIndex);
     const images = [];
-
     for (let i = 1; i < 4; i++) {
       images.push({
         src: `${updatedPath}/targets/target_${i}.jpg`,

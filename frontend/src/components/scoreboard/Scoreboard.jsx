@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from "react";
-import SearchSVG from "../../assets/svg/search.svg";
+import SearchSVG from "/assets/svg/search.svg";
 import style from "./Scoreboard.module.css";
 
 export default function Scoreboard() {

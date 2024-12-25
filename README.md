@@ -5,6 +5,15 @@
 <img src="./frontend/public/assets/images/app-image.png" alt="App image">
 <a href="https://fluffy-empanada-a2d6c3.netlify.app/" target="_blank">Link to the app website</a>
 
+<h2>Features:</h2>
+
+<ul>
+    <li>Choose the image to use</li>
+    <li>Click and select images to find</li>
+    <li>Scoreboard of the various players based on the image</li>
+    <li>Save your result</li>
+</ul>
+
 <h2>Technology used:</h2>
 
 <ul>
